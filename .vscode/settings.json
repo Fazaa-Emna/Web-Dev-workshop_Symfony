@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.yaml": "yaml"
+    },
+    "intelephense.files.associations": [
+    
+        "*.php",
+        "*.phtml"
+    ]
+}

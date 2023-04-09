@@ -1,0 +1,19 @@
+{{dump(classrooms)}}
+<table border=1>
+<tr>
+    <th> ID </th>
+    <th> Name </th>
+    <th> Modify </th>
+    <th> Delete </th>
+</tr>
+{% for classroom in classrooms %}
+<tr>
+        <td> {{classroom.id}} </td>
+        <td> {{classroom.name|upper() }} </td>
+        <td> <a href="{{ path('modifyClassroom',{'id':classroom.id}) }}">Modify</a> </td>
+        <td> <a href="{{ path('deleteClassroom',{'id':classroom.id}) }}">Delete</a> </td>
+</tr>
+
+{% else %} article not found
+{% endfor %}
+</table>

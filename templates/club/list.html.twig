@@ -1,0 +1,63 @@
+{#{{dump(courses)}}#}
+{% for course in courses %}
+    {{ course.Title|upper }}
+{% endfor %}
+{{"///////////////////////////////////////////////////"}}
+{{"Length of the list:" ~ courses|length }}
+{{"///////////////////////////////////////////////////"}}
+{{"Courses with theoretical training:"}}
+{% for course in courses %}
+    {% if course.Description is same as "theoretical training" %}
+        {{course.Title}}
+    {% endif %}
+{% endfor %}
+{{"///////////////////////////////////////////////////"}}
+{{"The course with the highest number of participants:"}}
+{% set max = 0 %}
+{% set maxPARcourse = "" %}
+{% for course in courses %}
+    {% if course.nb_participants > max %}
+        {% set max = course.nb_participants %}
+        {% set maxPARcourse = course.Title %}
+    {% endif %}
+{% endfor %}
+
+The course with the highest number of participants is "{{ maxPARcourse }}".
+{{"///////////////////////////////////////////////////"}}
+{% set tot= 0 %}
+{% if courses is not empty or courses is defined %}
+    {% for course in courses %}
+        {% set tot = tot + course.nb_participants %}
+    {% endfor %}
+    The the total number of participants in all courses is "{{ tot }}".
+{% else %}
+    The courses list is empty or is not defined !!!
+{% endif %}
+{{"///////////////////////////////////////////////////"}}
+
+<table border=1>
+<tr>
+    <th> Reference </th>
+    <th> Title </th>
+    <th> Description </th>
+    <th> Participants </th>
+    <th> Starting Date </th>
+</tr>
+{% for course in courses %}
+<tr>
+        <td> {{course.ref}} </td>
+        <td> {{ course.Title|upper() }} </td>
+        <td> {{ course.Description }} </td>
+        <td> {{ course.nb_participants }} </td>
+        <td> {{ course.start_date }} </td>
+        {% if course.nb_participants == 0 %}
+            <td> <a href="{{ path('getname',{'name': course.Title})}}">Participate</a> </td>
+        {% endif %}
+</tr>
+
+{% else %} article not found
+{% endfor %}
+</table>
+
+{{"///////////////////////////////////////////////////"}}
+

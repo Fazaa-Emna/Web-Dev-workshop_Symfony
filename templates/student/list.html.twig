@@ -1,0 +1,20 @@
+<table border=1>
+<tr>
+    <th> NSC </th>
+    <th> Class </th>
+    <th> Email </th>
+    <th> Modify </th>
+    <th> Delete </th>
+</tr>
+{% for student in students %}
+<tr>
+        <td> {{student.NSC}} </td>
+        <td> {{student.classroom.Name|upper() }} </td>
+        <td> {{student.Email}} </td>
+        <td> <a href="{{ path('modifyStudent',{'id':student.NSC}) }}">Modify</a> </td>
+        <td> <a href="{{ path('deleteStudent',{'id':student.NSC}) }}">Delete</a> </td>
+</tr>
+
+{% else %} article not found
+{% endfor %}
+</table>
